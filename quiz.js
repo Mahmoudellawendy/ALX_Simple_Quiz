@@ -1,31 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // مثال على متغير quiz - يمكن تمثيل السؤال والإجابة الصحيحة
-    const quiz = {
-        correctAnswer: "b"
-    };
+function checkAnswer() {
+    // 1. تحديد الإجابة الصحيحة
+    const correctAnswer = "4";
 
-    const submitButton = document.getElementById("submit-answer");
-    const feedbackDiv = document.getElementById("feedback");
+    // 2. جلب إجابة المستخدم من الراديو المختار
+    const selectedOption = document.querySelector('input[name="quiz"]:checked');
 
-    function checkAnswer() {
-        const selectedOption = document.querySelector('input[name="answer"]:checked');
-
-        if (!selectedOption) {
-            feedbackDiv.textContent = "Please select an answer before submitting.";
-            feedbackDiv.style.color = "#dc3545";
-            return;
-        }
-
-        const userAnswer = selectedOption.value;
-
-        if (userAnswer === quiz.correctAnswer) {
-            feedbackDiv.textContent = "Correct! Well done.";
-            feedbackDiv.style.color = "#28a745";
-        } else {
-            feedbackDiv.textContent = "That's incorrect. Try again!";
-            feedbackDiv.style.color = "#dc3545";
-        }
+    // 3. إذا المستخدم ما اختارش حاجة، ندي رسالة تنبيه
+    if (!selectedOption) {
+        document.getElementById("feedback").textContent = "Please select an answer.";
+        return; // نوقف الدالة هنا لأن مافيش إجابة
     }
 
-    submitButton.addEventListener("click", checkAnswer);
-});
+    // 4. الحصول على قيمة إجابة المستخدم
+    const userAnswer = selectedOption.value;
+
+    // 5. المقارنة بين إجابة المستخدم والإجابة الصحيحة
+    if (userAnswer === correctAnswer) {
+        document.getElementById("feedback").textContent = "Correct! Well done.";
+    } else {
+        document.getElementById("feedback").textContent = "That's incorrect. Try again!";
+    }
+}
+
+// 6. إضافة حدث الضغط على زر "Submit Answer" ليشغل دالة checkAnswer
+document.getElementById("submit-answer").addEventListener("click", checkAnswer);
