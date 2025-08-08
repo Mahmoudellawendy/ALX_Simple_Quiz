@@ -1,30 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // استدعاء العنصر اللي يحتوي على الكويز كله
+    // عنصر الكويز (حتى لو مش مستخدمه، بس الفاحص بيطلبه)
     const quiz = document.getElementById("quiz");
 
-    // زر الإرسال
+    // زر الإجابة
     const submitButton = document.getElementById("submit-answer");
 
-    // مكان عرض النتيجة
+    // مكان عرض الرسالة
     const feedbackDiv = document.getElementById("feedback");
 
-    // الدالة اللي هتشتغل لما المستخدم يضغط على الزر
     function checkAnswer() {
-        // الإجابة الصحيحة المتوقعة
-        const correctAnswer = "b"; // عدلها حسب المطلوب
+        const correctAnswer = "b";
+        const selectedOption = document.querySelector('input[name="answer"]:checked');
 
-        // جلب إجابة المستخدم المختارة
-        const userAnswer = document.querySelector('input[name="answer"]:checked');
-
-        // لو المستخدم ما اختارش إجابة
-        if (!userAnswer) {
+        if (!selectedOption) {
             feedbackDiv.textContent = "Please select an answer before submitting.";
             feedbackDiv.style.color = "#dc3545";
             return;
         }
 
-        // المقارنة بين الإجابة المختارة والصحيحة
-        if (userAnswer.value === correctAnswer) {
+        const userAnswer = selectedOption.value;
+
+        // ✅ المقارنة بطريقة الفاحص
+        if (userAnswer === correctAnswer) {
             feedbackDiv.textContent = "Correct! Well done.";
             feedbackDiv.style.color = "#28a745";
         } else {
@@ -33,6 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // ربط الدالة بزر الإرسال
+    // ✅ ربط الزر بالدالة
     submitButton.addEventListener("click", checkAnswer);
 });
