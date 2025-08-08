@@ -1,9 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // مثال على متغير quiz - يمكن تمثيل السؤال والإجابة الصحيحة
+    const quiz = {
+        correctAnswer: "b"
+    };
+
     const submitButton = document.getElementById("submit-answer");
     const feedbackDiv = document.getElementById("feedback");
 
     function checkAnswer() {
-        const correctAnswer = "b";
         const selectedOption = document.querySelector('input[name="answer"]:checked');
 
         if (!selectedOption) {
@@ -14,16 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const userAnswer = selectedOption.value;
 
-        if (userAnswer === correctAnswer) {
+        if (userAnswer === quiz.correctAnswer) {
             feedbackDiv.textContent = "Correct! Well done.";
             feedbackDiv.style.color = "#28a745";
         } else {
-            // لازم النص ده بالظبط
             feedbackDiv.textContent = "That's incorrect. Try again!";
             feedbackDiv.style.color = "#dc3545";
         }
     }
 
-    // ربط الزر بالحدث
     submitButton.addEventListener("click", checkAnswer);
 });
