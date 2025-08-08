@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // عنصر الكويز (حتى لو مش مستخدمه، بس الفاحص بيطلبه)
-    const quiz = document.getElementById("quiz");
-
-    // زر الإجابة
     const submitButton = document.getElementById("submit-answer");
-
-    // مكان عرض الرسالة
     const feedbackDiv = document.getElementById("feedback");
 
     function checkAnswer() {
@@ -20,16 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const userAnswer = selectedOption.value;
 
-        // ✅ المقارنة بطريقة الفاحص
         if (userAnswer === correctAnswer) {
             feedbackDiv.textContent = "Correct! Well done.";
             feedbackDiv.style.color = "#28a745";
         } else {
-            feedbackDiv.textContent = "Incorrect. Try again!";
+            // لازم النص ده بالظبط
+            feedbackDiv.textContent = "That's incorrect. Try again!";
             feedbackDiv.style.color = "#dc3545";
         }
     }
 
-    // ✅ ربط الزر بالدالة
+    // ربط الزر بالحدث
     submitButton.addEventListener("click", checkAnswer);
 });
