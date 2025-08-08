@@ -1,33 +1,35 @@
-// انتظر تحميل الصفحة بالكامل قبل تنفيذ الكود
 document.addEventListener("DOMContentLoaded", function () {
-    // جلب زر الإرسال
+    // استدعاء العنصر اللي يحتوي على الكويز كله
+    const quiz = document.getElementById("quiz");
+
+    // زر الإرسال
     const submitButton = document.getElementById("submit-answer");
 
-    // تعريف دالة التحقق من الإجابة
+    // مكان عرض النتيجة
+    const feedbackDiv = document.getElementById("feedback");
+
+    // الدالة اللي هتشتغل لما المستخدم يضغط على الزر
     function checkAnswer() {
-        // جلب القيمة الصحيحة (الإجابة الصحيحة)
-        const correctAnswer = "b"; // عدلها حسب إجابتك الصحيحة
+        // الإجابة الصحيحة المتوقعة
+        const correctAnswer = "b"; // عدلها حسب المطلوب
 
         // جلب إجابة المستخدم المختارة
         const userAnswer = document.querySelector('input[name="answer"]:checked');
 
-        // مكان عرض النتيجة
-        const feedbackDiv = document.getElementById("feedback");
-
-        // تأكد إن المستخدم اختار إجابة
+        // لو المستخدم ما اختارش إجابة
         if (!userAnswer) {
             feedbackDiv.textContent = "Please select an answer before submitting.";
-            feedbackDiv.style.color = "#dc3545"; // أحمر
+            feedbackDiv.style.color = "#dc3545";
             return;
         }
 
-        // مقارنة الإجابة
+        // المقارنة بين الإجابة المختارة والصحيحة
         if (userAnswer.value === correctAnswer) {
             feedbackDiv.textContent = "Correct! Well done.";
-            feedbackDiv.style.color = "#28a745"; // أخضر
+            feedbackDiv.style.color = "#28a745";
         } else {
             feedbackDiv.textContent = "Incorrect. Try again!";
-            feedbackDiv.style.color = "#dc3545"; // أحمر
+            feedbackDiv.style.color = "#dc3545";
         }
     }
 
