@@ -1,40 +1,36 @@
+// انتظر تحميل الصفحة بالكامل قبل تنفيذ الكود
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("registration-form");
-    const feedbackDiv = document.getElementById("form-feedback");
+    // جلب زر الإرسال
+    const submitButton = document.getElementById("submit-answer");
 
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
+    // تعريف دالة التحقق من الإجابة
+    function checkAnswer() {
+        // جلب القيمة الصحيحة (الإجابة الصحيحة)
+        const correctAnswer = "b"; // عدلها حسب إجابتك الصحيحة
 
-        const username = document.getElementById("username").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
+        // جلب إجابة المستخدم المختارة
+        const userAnswer = document.querySelector('input[name="answer"]:checked');
 
-        let isValid = true;
-        const messages = [];
+        // مكان عرض النتيجة
+        const feedbackDiv = document.getElementById("feedback");
 
-        if (username.length < 3) {
-            isValid = false;
-            messages.push("Username must be at least 3 characters.");
+        // تأكد إن المستخدم اختار إجابة
+        if (!userAnswer) {
+            feedbackDiv.textContent = "Please select an answer before submitting.";
+            feedbackDiv.style.color = "#dc3545"; // أحمر
+            return;
         }
 
-        if (!email.includes("@") || !email.includes(".")) {
-            isValid = false;
-            messages.push("Please enter a valid email address.");
-        }
-
-        if (password.length < 8) {
-            isValid = false;
-            messages.push("Password must be at least 8 characters.");
-        }
-
-        feedbackDiv.style.display = "block";
-
-        if (isValid) {
-            feedbackDiv.textContent = "Registration successful!";
-            feedbackDiv.style.color = "#28a745";
+        // مقارنة الإجابة
+        if (userAnswer.value === correctAnswer) {
+            feedbackDiv.textContent = "Correct! Well done.";
+            feedbackDiv.style.color = "#28a745"; // أخضر
         } else {
-            feedbackDiv.innerHTML = messages.join("<br>");
-            feedbackDiv.style.color = "#dc3545";
+            feedbackDiv.textContent = "Incorrect. Try again!";
+            feedbackDiv.style.color = "#dc3545"; // أحمر
         }
-    });
+    }
+
+    // ربط الدالة بزر الإرسال
+    submitButton.addEventListener("click", checkAnswer);
 });
